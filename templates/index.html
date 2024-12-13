@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flight Price Prediction</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        padding: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 10px;
+        font-size: 16px;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Flight Price Prediction</h2>
+      <form action="/predict" method="POST">
+        <!-- Airline selection -->
+        <label for="airline">Airline:</label>
+        <select id="airline" name="airline" required>
+          <option value="0">AirAsia</option>
+          <option value="1">Air India</option>
+          <option value="2">GO FIRST</option>
+          <option value="3">Indigo</option>
+          <option value="4">SpiceJet</option>
+          <option value="5">Vistara</option>
+        </select>
+
+        <!-- Flight number -->
+        <label for="flight">Flight Number:</label>
+        <input type="number" id="flight" name="flight" required />
+
+        <!-- Source city selection -->
+        <label for="source_city">Source City:</label>
+        <select id="source_city" name="source_city" required>
+          <option value="0">Bangalore</option>
+          <option value="1">Chennai</option>
+          <option value="2">Delhi</option>
+          <option value="3">Hyderabad</option>
+          <option value="4">Kolkata</option>
+          <option value="5">Mumbai</option>
+        </select>
+
+        <!-- Departure time selection -->
+        <label for="departure_time">Departure Time:</label>
+        <select id="departure_time" name="departure_time" required>
+          <option value="0">Afternoon</option>
+          <option value="1">Early Morning</option>
+          <option value="2">Evening</option>
+          <option value="3">Late Night</option>
+          <option value="4">Morning</option>
+          <option value="5">Night</option>
+        </select>
+
+        <!-- Stops selection -->
+        <label for="stops">Stops:</label>
+        <select id="stops" name="stops" required>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+
+        <!-- Arrival time selection -->
+        <label for="arrival_time">Arrival Time:</label>
+        <select id="arrival_time" name="arrival_time" required>
+          <option value="0">Afternoon</option>
+          <option value="1">Early Morning</option>
+          <option value="2">Evening</option>
+          <option value="3">Late Night</option>
+          <option value="4">Morning</option>
+          <option value="5">Night</option>
+        </select>
+
+        <!-- Destination city selection -->
+        <label for="destination_city">Destination City:</label>
+        <select id="destination_city" name="destination_city" required>
+          <option value="0">Bangalore</option>
+          <option value="1">Chennai</option>
+          <option value="2">Delhi</option>
+          <option value="3">Hyderabad</option>
+          <option value="4">Kolkata</option>
+          <option value="5">Mumbai</option>
+        </select>
+
+        <!-- Class selection (updated to avoid using 'class' as the name attribute) -->
+        <label for="flight_class">Class:</label>
+        <select id="flight_class" name="flight_class" required>
+          <option value="0">Business</option>
+          <option value="1">Economy</option>
+        </select>
+
+        <!-- Duration input -->
+        <label for="duration">Duration (hours):</label>
+        <input
+          type="number"
+          id="duration"
+          name="duration"
+          required
+          min="0"
+          step="any"
+          placeholder="Enter duration"
+          oninput="validateDuration()"
+        />
+        <script>
+          function validateDuration() {
+            const durationInput = document.getElementById("duration");
+            const inputValue = parseFloat(durationInput.value);
+            // Check if the input is a valid number and is positive
+            if (isNaN(inputValue) || inputValue <= 0) {
+              durationInput.setCustomValidity("Please enter a valid positive duration.");
+            } else {
+              durationInput.setCustomValidity("");
+            }
+          }
+        </script>
+
+        <!-- Days Left input -->
+        <label for="days_left">Days Left:</label>
+        <input type="number" id="days_left" name="days_left" placeholder="0-49" required />
+
+        <!-- Submit button -->
+        <button type="submit">Predict Price</button>
+      </form>
+    </div>
+  </body>
+</html>
